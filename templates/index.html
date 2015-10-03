@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Robo</title>
+  <style>
+  html, body {
+	height: 100%;
+	width: 100%;
+  }
+  
+  img.web-cam {
+	-webkit-user-select: none;
+	height: 100%;
+	width: auto;
+  }
+  </style>
+</head>
+
+<body>
+  <div>
+	<input type="range" min="0" max="360" step="1" class="cam" />
+  </div>
+  <div>
+	<img class="web-cam" src="http://192.168.1.148:8081/">
+  </div>
+  <script type="text/javascript" src="/static/js/jquery/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="/static/js/socket.io/socket.io-0.9.16.min.js"></script>
+  <script type="text/javascript" src="/static/js/app/index.js"></script>
+</body>
+
+</html>
