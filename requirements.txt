@@ -9,4 +9,4 @@ gevent-websocket==0.9.2
 greenlet==0.4.2
 itsdangerous==0.23
 ujson==1.33
-RPi.GPIO=RPi.GPIO-0.6.2
+RPi.GPIO==RPi.GPIO-0.6.2
