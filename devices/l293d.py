@@ -39,8 +39,8 @@ class L293d:
         if (speed):
             if speed > 100:
                 speed = 100
-            elif speed <= 10:
-                speed = 10
+            elif speed <= 0:
+                speed = 0
 
             self.speed_pwm.ChangeDutyCycle(speed)
             self.speed = speed
