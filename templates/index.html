@@ -2,31 +2,61 @@
 <html>
 
 <head>
-  <title>Robo</title>
-  <style>
+    <title>Robo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <style>
   html, body {
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
   }
-  
-  img.web-cam {
-	-webkit-user-select: none;
-	height: 100%;
-	width: auto;
+
+   div.joystick {
+   background: red;
+   width: 200px;
+   height: 200px;
+   position: fixed;
+    border-radius: 10px;
   }
-  </style>
+
+
+
+  div.joystick.joystick-left {
+   bottom: 10px;
+   left: 10px;
+  }
+
+  div.joystick.joystick-right {
+   bottom: 10px;
+   right: 10px;
+  }
+
+  div.joystick div.joystick-pointer {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background: black;
+    box-shadow: 0 0 20px white inset;
+    border-radius: 10px;
+  }
+    </style>
 </head>
 
 <body>
-  <div>
-	<input type="range" min="0" max="360" step="1" class="cam" />
-  </div>
-  <div>
-	<img class="web-cam" src="http://192.168.1.148:8081/">
-  </div>
-  <script type="text/javascript" src="/static/js/jquery/jquery-2.1.4.min.js"></script>
-  <script type="text/javascript" src="/static/js/socket.io/socket.io-0.9.16.min.js"></script>
-  <script type="text/javascript" src="/static/js/app/index.js"></script>
+
+<div id="log-left"></div>
+<div id="log-right"></div>
+
+<div id="joystick-left" class="joystick joystick-left">
+</div>
+<div id="joystick-right" class="joystick joystick-right">
+</div>
+
+<script type="text/javascript" src="/static/node_modules/socket.io-client/socket.io.js"></script>
+
+<script type="text/javascript" src="/static/js/joystick.js"></script>
+<script type="text/javascript" src="/static/js/index.js"></script>
 </body>
 
 </html>
