@@ -13,10 +13,11 @@
   }
 
    div.joystick {
-   background: red;
-   width: 200px;
-   height: 200px;
-   position: fixed;
+    background: rgba(158, 158, 158, 0.4);
+    box-shadow: 0 0 20px black inset;
+    width: 200px;
+    height: 200px;
+    position: fixed;
     border-radius: 10px;
   }
 
@@ -34,16 +35,14 @@
     position: relative;
     width: 40px;
     height: 40px;
-    background: black;
-    box-shadow: 0 0 20px white inset;
+    background: rgba(158, 158, 158, 0.37);
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.45);
     border-radius: 10px;
   }
     </style>
 </head>
 
 <body>
-    <pre>{{ hostname }}</pre>
-
     <div id="joystick-left" class="joystick joystick-left"></div>
     <div id="joystick-right" class="joystick joystick-right"></div>
 
