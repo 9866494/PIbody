@@ -45,4 +45,7 @@
     joystickRight.setCallback(function(x, y, toggled){
         socket.emit('movement', {x: x, y: y, toggled: toggled});
     });
+
+    document.body.style.background = 'url(http://' + document.domain + ':8080/?action=stream) no-repeat center center fixed'
+    document.body.style.backgroundSize = 'cover';
 })();
