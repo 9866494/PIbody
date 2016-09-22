@@ -1,42 +1,63 @@
-#!/usr/bin/env python
-
 from time import sleep
+from random import randint, random
 
 import RPi.GPIO as GPIO
-import random
 
-CLOCK_PIN = 11
-DATA_PIN = 12
-LATCH_PIN = 13
+class L293d:
+    speed = 100
 
-GPIO.setmode(GPIO.BOARD)
+    def __init__(self, forward_pin, backward_pin, speed_pin):
+        self.FORWARD_PIN = forward_pin
+        self.BACKWARD_PIN = backward_pin
+        self.SPEED_PIN = speed_pin
 
-GPIO.setup(CLOCK_PIN, GPIO.OUT)
-GPIO.setup(DATA_PIN, GPIO.OUT)
-GPIO.setup(LATCH_PIN, GPIO.OUT)
+        GPIO.setup(self.FORWARD_PIN, GPIO.OUT)
+        GPIO.setup(self.BACKWARD_PIN, GPIO.OUT)
+        GPIO.setup(self.SPEED_PIN, GPIO.OUT)
 
-GPIO.output(LATCH_PIN, 0)
-GPIO.output(CLOCK_PIN, 0)
-GPIO.output(DATA_PIN, 0)
+        self.stop()
 
-for k in range(8):
-    GPIO.output(LATCH_PIN, 0)
-    GPIO.output(DATA_PIN, 0)
+        self.speed_pwm = GPIO.PWM(self.SPEED_PIN, self.speed)
+        self.speed_pwm.start(1)
 
-    print k
+    def stop(self):
+        GPIO.output(self.BACKWARD_PIN, 0)
+        GPIO.output(self.FORWARD_PIN, 0)
 
-    for i in range(8):
-        GPIO.output(CLOCK_PIN, 0)
-
-        if i == k:
-            GPIO.output(DATA_PIN, 1)
+    def move(self, speed = None):
+        if speed > 0:
+            self.forward(abs(speed))
         else:
-            GPIO.output(DATA_PIN, 0)
+            self.backward(abs(speed))
 
-        GPIO.output(CLOCK_PIN, 1)
+    def forward(self, speed = None):
+        self.setSpeed(speed)
+        GPIO.output(self.BACKWARD_PIN, 0)
+        GPIO.output(self.FORWARD_PIN, 1)
 
-    GPIO.output(LATCH_PIN, 1)
+    def backward(self, speed = None):
+        self.setSpeed(speed)
+        GPIO.output(self.BACKWARD_PIN, 1)
+        GPIO.output(self.FORWARD_PIN, 0)
 
-    sleep(1)
+    def setSpeed(self, speed):
+        if (speed):
+            if speed > 100:
+                speed = 100
+            elif speed <= 10:
+                speed = 10
 
-GPIO.cleanup()
+            if self.speed != speed:
+                self.speed_pwm.ChangeDutyCycle(speed)
+                self.speed = speed
+
+    def test(self):
+        for fwd in range(randint(0,25)):
+            self.forward(randint(0,100))
+            sleep(random())
+
+        for fwd in range(randint(0,25)):
+            self.backward(randint(0,100))
+            sleep(random())
+
+        self.stop()

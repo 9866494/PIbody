@@ -3,6 +3,10 @@
 function Joystick(id, resetOnLeave) {
     this.element = document.getElementById(id);
 
+    if (!this.element) {
+        throw "Joystick, object not found by id"
+    }
+
     var pointer = document.createElement('div');
     pointer.className = 'joystick-pointer';
     this.element.appendChild(pointer);
