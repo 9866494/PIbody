@@ -57,4 +57,4 @@ docs/_build/
 target/
 
 static/node_modules/
-Будет удалено .idea/
+.idea/
